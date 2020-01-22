@@ -1,8 +1,7 @@
 # Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
 
 * Студент: [Саморуков Виталий](https://up.htmlacademy.ru/javascript/19/user/998135).
-* Наставник: `Неизвестно`.
-
+* Наставник: [Евгений Самойленко](https://htmlacademy.ru/profile/id999539).
 ---
 
 _Не удаляйте и не обращайте внимание на файлы:_<br>
