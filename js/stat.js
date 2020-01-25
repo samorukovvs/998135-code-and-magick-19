@@ -17,6 +17,12 @@ var MessageFont = {
   LINE_HEIGHT: 32
 };
 
+var Statusbar = {
+  MAX_HEIGHT: 150,
+  WIDTH: 40,
+  MARGIN_RIGHT: 50
+};
+
 var renderMessageWindow = function (ctx, x, y, height, width, mainColor, shadowColor, shadowX, shadowY) {
   ctx.fillStyle = shadowColor;
   ctx.fillRect(x + shadowX, y + shadowY, height, width);
@@ -30,7 +36,20 @@ var renderText = function (ctx, txt, x, y, fontFace, fontSize, fontColor) {
   ctx.fillText(txt, MessageWindow.POSITION_X + x, MessageWindow.POSITION_Y + y, MessageWindow.WIDTH - 20);
 };
 
-var render
+var createRandomBlue = function () {
+  var saturation = Math.floor(Math.random() * 100);
+  var randomBlue = 'hsl(240, ' + saturation + '%, 50%)';
+  return randomBlue;
+};
+
+var renderStatusbar = function(ctx, barNumber, percents) {
+  var randomColor = createRandomBlue();
+  ctx.fillStyle = randomColor;
+  var x = MessageWindow.POSITION_X + MessageFont.LINE_HEIGHT +(Statusbar.WIDTH + Statusbar.MARGIN_RIGHT) * barNumber;
+  var y = MessageWindow.POSITION_Y + MessageWindow.HEIGHT - MessageFont.LINE_HEIGHT;
+  var height = 150 * percents * -1;
+  ctx.fillRect(x, y, Statusbar.WIDTH, height);
+};
 
 
 var renderStatistics = function (ctx, names, times) {
