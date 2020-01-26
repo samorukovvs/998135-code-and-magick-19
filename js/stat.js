@@ -14,7 +14,7 @@ var MessageFont = {
   FACE: 'PT Mono',
   SIZE: 16,
   COLOR: '#000',
-  LINE_HEIGHT: 32
+  LINE_HEIGHT: 25
 };
 
 var Statusbar = {
@@ -42,18 +42,32 @@ var createRandomBlue = function () {
   return randomBlue;
 };
 
-var renderStatusbar = function(ctx, barNumber, percents) {
-  var randomColor = createRandomBlue();
-  ctx.fillStyle = randomColor;
-  var x = MessageWindow.POSITION_X + MessageFont.LINE_HEIGHT +(Statusbar.WIDTH + Statusbar.MARGIN_RIGHT) * barNumber;
+var renderStatusbar = function (ctx, barNumber, percents, user, score) {
+  if(user === 'Вы'){
+    ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+  } else {
+    ctx.fillStyle = createRandomBlue();
+  };
+  var x = MessageWindow.POSITION_X + MessageFont.LINE_HEIGHT + (Statusbar.WIDTH + Statusbar.MARGIN_RIGHT) * barNumber;
   var y = MessageWindow.POSITION_Y + MessageWindow.HEIGHT - MessageFont.LINE_HEIGHT;
   var height = 150 * percents * -1;
   ctx.fillRect(x, y, Statusbar.WIDTH, height);
+  ctx.fillStyle = MessageFont.COLOR;
+  ctx.fillText(user, x, y + MessageFont.LINE_HEIGHT / 1.5);
+  ctx.fillText(Math.floor(score), x, y + height - MessageFont.LINE_HEIGHT / 4);
 };
 
+var renderStatusbars = function (ctx, userNames, scores) {
+  var maxScore = Math.max(...scores);
+  for (var i = 0; i < userNames.length; i++) {
+    var statusHeight = scores[i] / maxScore;
+    renderStatusbar(ctx, i, statusHeight, userNames[i], scores[i]);
+  }
+};
 
 var renderStatistics = function (ctx, names, times) {
   renderMessageWindow(ctx, MessageWindow.POSITION_X, MessageWindow.POSITION_Y, MessageWindow.WIDTH, MessageWindow.HEIGHT, MessageWindow.COLOR, MessageWindow.SHADOW_COLOR, MessageWindow.SHADOW_OFFSET_X, MessageWindow.SHADOW_OFFSET_Y);
   renderText(ctx, 'Ура вы победили! ', MessageFont.LINE_HEIGHT, MessageFont.LINE_HEIGHT, MessageFont.FACE, MessageFont.SIZE, MessageFont.COLOR);
   renderText(ctx, 'Список результатов:', MessageFont.LINE_HEIGHT, MessageFont.LINE_HEIGHT*2, MessageFont.FACE, MessageFont.SIZE, MessageFont.COLOR);
+  renderStatusbars(ctx, names, times);
 };
