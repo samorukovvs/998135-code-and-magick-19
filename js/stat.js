@@ -43,11 +43,11 @@ var createRandomBlue = function () {
 };
 
 var renderStatusbar = function (ctx, barNumber, percents, user, score) {
-  if(user === 'Вы'){
+  if (user === 'Вы') {
     ctx.fillStyle = 'rgba(255, 0, 0, 1)';
   } else {
     ctx.fillStyle = createRandomBlue();
-  };
+  }
   var x = MessageWindow.POSITION_X + MessageFont.LINE_HEIGHT + (Statusbar.WIDTH + Statusbar.MARGIN_RIGHT) * barNumber;
   var y = MessageWindow.POSITION_Y + MessageWindow.HEIGHT - MessageFont.LINE_HEIGHT;
   var height = 150 * percents * -1;
@@ -68,6 +68,6 @@ var renderStatusbars = function (ctx, userNames, scores) {
 var renderStatistics = function (ctx, names, times) {
   renderMessageWindow(ctx, MessageWindow.POSITION_X, MessageWindow.POSITION_Y, MessageWindow.WIDTH, MessageWindow.HEIGHT, MessageWindow.COLOR, MessageWindow.SHADOW_COLOR, MessageWindow.SHADOW_OFFSET_X, MessageWindow.SHADOW_OFFSET_Y);
   renderText(ctx, 'Ура вы победили! ', MessageFont.LINE_HEIGHT, MessageFont.LINE_HEIGHT, MessageFont.FACE, MessageFont.SIZE, MessageFont.COLOR);
-  renderText(ctx, 'Список результатов:', MessageFont.LINE_HEIGHT, MessageFont.LINE_HEIGHT*2, MessageFont.FACE, MessageFont.SIZE, MessageFont.COLOR);
+  renderText(ctx, 'Список результатов:', MessageFont.LINE_HEIGHT, MessageFont.LINE_HEIGHT * 2, MessageFont.FACE, MessageFont.SIZE, MessageFont.COLOR);
   renderStatusbars(ctx, names, times);
 };
