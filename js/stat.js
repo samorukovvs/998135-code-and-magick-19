@@ -58,7 +58,7 @@ var renderStatusbar = function (ctx, barNumber, percents, user, score) {
 };
 
 var renderStatusbars = function (ctx, userNames, scores) {
-  var maxScore = Math.max(...scores);
+  var maxScore = Math.max.apply(null, scores);
   for (var i = 0; i < userNames.length; i++) {
     var statusHeight = scores[i] / maxScore;
     renderStatusbar(ctx, i, statusHeight, userNames[i], scores[i]);
