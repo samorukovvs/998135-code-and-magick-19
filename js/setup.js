@@ -4,7 +4,7 @@ setupWindow.classList.remove('hidden');
 document.querySelector('.setup-similar').classList.remove('hidden');
 
 var WisardsData = {
-   FIRST_NAME: [
+  FIRST_NAME: [
     'Иван',
     'Хуан Себастьян',
     'Мария',
