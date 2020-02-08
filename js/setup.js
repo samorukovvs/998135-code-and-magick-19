@@ -1,8 +1,4 @@
 'use strict';
-var setupWindow = document.querySelector('.setup');
-setupWindow.classList.remove('hidden');
-document.querySelector('.setup-similar').classList.remove('hidden');
-
 var WizardsData = {
   FIRST_NAME: [
     'Иван',
@@ -39,6 +35,33 @@ var WizardsData = {
     'green'
   ]
 };
+
+var ESC_KEY = 'Escape';
+var ENTER_KEY = 'Enter';
+
+// Закрытие и открытие окна setup
+var setupWindow = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setupWindow.querySelector('.setup-close');
+
+var openSetupWindow = function () {
+  setupWindow.classList.remove('hidden');
+  setupClose.addEventListener('click', onCloseSetupWindow);
+  document.addEventListener('keydown', function (evt) {
+    if (evt.key === ESC_KEY) {
+      onCloseSetupWindow();
+    }
+  });
+};
+
+var onCloseSetupWindow = function () {
+  setupWindow.classList.add('hidden');
+};
+
+setupOpen.addEventListener('click', openSetupWindow);
+
+//document.querySelector('.setup-similar').classList.remove('hidden');
+
 var takeRandomElement = function (dataArray) {
   return dataArray[Math.floor((Math.random() * dataArray.length))];
 };
@@ -64,3 +87,5 @@ for (var i = 0; i < 4; i++) {
   wizardElement.querySelector('.wizard-eyes').style.fill = newWizard.eyesColor;
   similarListElement.appendChild(wizardElement);
 }
+
+
