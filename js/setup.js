@@ -43,24 +43,41 @@ var ENTER_KEY = 'Enter';
 var setupWindow = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setupWindow.querySelector('.setup-close');
+var userName = setupWindow.querySelector('.setup-user-name');
+
+var onEscKeyPress = function (evt) {
+  if (evt.key === ESC_KEY && evt.target !== userName) {
+    closeSetupPopup();
+  }
+};
 
 var openSetupWindow = function () {
   setupWindow.classList.remove('hidden');
-  setupClose.addEventListener('click', onCloseSetupWindow);
-  document.addEventListener('keydown', function (evt) {
-    if (evt.key === ESC_KEY) {
-      onCloseSetupWindow();
-    }
-  });
+  document.addEventListener('keydown', onEscKeyPress);
 };
 
-var onCloseSetupWindow = function () {
+var closeSetupPopup = function () {
   setupWindow.classList.add('hidden');
+  document.removeEventListener('keydown', onEscKeyPress);
 };
 
 setupOpen.addEventListener('click', openSetupWindow);
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.key === ENTER_KEY) {
+    openSetupWindow();
+  }
+});
+setupClose.addEventListener('click', function () {
+  closeSetupPopup();
+});
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.key === ENTER_KEY) {
+    closeSetupPopup();
+  }
+});
 
-//document.querySelector('.setup-similar').classList.remove('hidden');
+// Генерация похожих персонажей
+document.querySelector('.setup-similar').classList.remove('hidden');
 
 var takeRandomElement = function (dataArray) {
   return dataArray[Math.floor((Math.random() * dataArray.length))];
