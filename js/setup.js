@@ -33,6 +33,13 @@ var WizardsData = {
     'blue',
     'yellow',
     'green'
+  ],
+  FIREBALL_COLORS: [
+    '#ee4830',
+    '#30a8ee',
+    '#5ce6c0',
+    '#e848d5',
+    '#e6e848'
   ]
 };
 
@@ -75,7 +82,6 @@ setupClose.addEventListener('keydown', function (evt) {
     closeSetupPopup();
   }
 });
-
 // Генерация похожих персонажей
 document.querySelector('.setup-similar').classList.remove('hidden');
 
@@ -104,5 +110,36 @@ for (var i = 0; i < 4; i++) {
   wizardElement.querySelector('.wizard-eyes').style.fill = newWizard.eyesColor;
   similarListElement.appendChild(wizardElement);
 }
+
+// Работа с кастомизацией основного персонажа.
+// Цвет плаща
+var userCoat = setupWindow.querySelector('.setup-wizard .wizard-coat');
+var userCoatData = setupWindow.querySelector('[name="coat-color"]');
+var changeUserCoatColor = function () {
+  var coatColor = takeRandomElement(WizardsData.COAT_COLORS);
+  userCoat.style.fill = coatColor;
+  userCoatData.setAttribute('value', coatColor);
+};
+userCoat.addEventListener('click', changeUserCoatColor);
+
+// Цвет глаз
+var userEyes = setupWindow.querySelector('.setup-wizard .wizard-eyes');
+var userEyesData = setupWindow.querySelector('[name="eyes-color"]');
+var changeUserEyesColor = function () {
+  var eyesColor = takeRandomElement(WizardsData.EYES_COLORS);
+  userEyes.style.fill = eyesColor;
+  userEyesData.setAttribute('value', eyesColor);
+};
+userEyes.addEventListener('click', changeUserEyesColor);
+
+// Цвет фаербола
+var userFireball = setupWindow.querySelector('.setup-fireball-wrap');
+var userFireballData = setupWindow.querySelector('[name="fireball-color"]');
+var changeUserFireballColor = function () {
+  var fireballColor = takeRandomElement(WizardsData.FIREBALL_COLORS);
+  userFireball.style.background = fireballColor;
+  userFireballData.setAttribute('value', fireballColor);
+};
+userFireball.addEventListener('click', changeUserFireballColor);
 
 
