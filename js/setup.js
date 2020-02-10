@@ -74,9 +74,9 @@ setupOpen.addEventListener('keydown', function (evt) {
     openSetupWindow();
   }
 });
-setupClose.addEventListener('click', function () {
-  closeSetupPopup();
-});
+
+setupClose.addEventListener('click', closeSetupPopup);
+
 setupClose.addEventListener('keydown', function (evt) {
   if (evt.key === ENTER_KEY) {
     closeSetupPopup();
@@ -141,5 +141,3 @@ var changeUserFireballColor = function () {
   userFireballData.setAttribute('value', fireballColor);
 };
 userFireball.addEventListener('click', changeUserFireballColor);
-
-
